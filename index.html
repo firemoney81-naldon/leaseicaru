@@ -1,23 +1,640 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "BMW 7시리즈 장기렌트가 일반 구매나 할부보다 좋은 점은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "장기렌트의 가장 큰 장점은 초기 비용 부담이 적다는 것입니다. 취득세, 등록세 등 초기 목돈이 들어가지 않으며, 보험료와 자동차세가 월 렌트료에 포함되어 있어 매달 지출 내역을 예측하기 쉽습니다. 또한, 개인 명의가 아닌 렌트사 명의로 차량을 등록하여 건강보험료 인상 부담이 없다는 장점이 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "BMW 7시리즈 장기렌트 비용은 평균적으로 얼마인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "BMW 7시리즈 장기렌트 비용은 차량 모델(730i, 740d 등), 옵션, 계약 기간(36개월, 48개월 등), 약정 주행 거리(연 1만km, 2만km 등), 그리고 보증금/선납금 여부에 따라 크게 달라집니다. 정확한 예상 금액을 알기 위해서는 전문 업체별 실시간 비교 견적을 받아보는 것이 가장 정확하며, 보통 월 100만 원대 후반에서 200만 원대 초반으로 형성됩니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "장기렌트 시 보험 처리는 어떻게 되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "장기렌트 차량은 렌트 업체 명의로 보험에 가입됩니다. 따라서 사고가 발생해도 개인 보험료 할증이 없어 보험 경력 단절에 대한 부담이 적습니다. 사고 발생 시 렌터카 업체에 연락하여 사고 접수 및 처리를 위임할 수 있어 편리합니다. 다만, 렌터카마다 면책금 제도가 적용되므로 사고 시 발생하는 본인 부담금을 미리 확인해야 합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "BMW 7시리즈 장기렌트를 저렴하게 이용할 수 있는 방법이 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "가장 저렴한 곳을 찾으려면 여러 렌트 업체의 견적을 비교하는 것이 필수입니다. 업체마다 프로모션 할인, 잔가율 책정, 초기 비용 설정(보증금/선납금) 조건이 다르므로, 최소 3~4곳 이상의 업체 견적을 받아보는 것이 좋습니다. 신차급 중고차를 렌트하는 '장기 렌트 승계'도 저렴한 비용으로 이용할 수 있는 좋은 방법입니다."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- 스타일: 부드럽고 다채로운 색, 타이틀 강조, 계층 구조 -->
+    <style>
+      :root {
+        --primary-color: #003366; /* BMW 블루 계열 */
+        --secondary-color: #1A759F; /* 부드러운 파란색 */
+        --accent-color: #5BAED2; /* 밝은 파란색 */
+        --highlight-color: #E6F3F8; /* 아주 밝은 파란색 배경 */
+        --text-color: #333333; /* 어두운 회색 텍스트 */
+        --bg-light: #F8FBFD; /* 연한 배경색 */
+        --bg-white: #ffffff; /* 흰색 배경 */
+        --btn-color: #F0A500; /* 강조색 (버튼 - 골드 계열) */
+        --btn-hover: #D89400; /* 버튼 호버색 */
+        --section-bg-dark: #f0f8ff; /* 섹션 배경 (밝은 하늘색) */
+      }
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap');
+
+      body {
+        font-family: 'Noto Sans KR', sans-serif;
+        margin:0; padding:0;
+        background-color: var(--bg-light);
+        color: var(--text-color);
+        line-height:1.7; /* 줄간격 조정 */
+      }
+      .container {
+        max-width: 1000px;
+        margin:0 auto;
+        padding:0 20px;
+      }
+      header {
+        background-color: var(--primary-color);
+        padding: 30px 20px;
+        text-align: center;
+        color: var(--bg-white);
+      }
+      header h1 {
+        margin: 0;
+        font-size: 2.8em;
+        font-weight:900; /* 폰트 두께 강조 */
+      }
+      header h1 a {
+        color: var(--bg-white);
+        text-decoration: none;
+      }
+      .hero {
+        background: url('https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
+        position: relative;
+        padding: 120px 20px;
+        color: var(--bg-white);
+        text-align: center;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5); /* 오버레이 */
+      }
+      .hero-content {
+        position: relative;
+        z-index: 10;
+      }
+      .hero h1 {
+        font-size: 3.5em;
+        margin-bottom: 20px;
+        font-weight:900;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      }
+      .hero p {
+        font-size: 1.4em;
+        margin-bottom: 35px;
+        line-height: 1.5;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      }
+      .cta-btn {
+        background-color: var(--btn-color);
+        color: var(--bg-white);
+        padding: 18px 45px;
+        font-size:1.3em;
+        font-weight: bold;
+        border:none;
+        border-radius:50px;
+        cursor:pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        text-decoration: none;
+        display: inline-block;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        margin-top: 20px;
+      }
+      .cta-btn:hover {
+        background-color: var(--btn-hover);
+        transform: translateY(-3px);
+      }
+      .compare-form-box {
+        background-color: rgba(255, 255, 255, 0.95); /* 투명도 추가 */
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        margin-top: 30px;
+        text-align: left;
+        color: var(--text-color);
+        position: relative;
+      }
+      .compare-form-box h2 {
+        color: var(--primary-color);
+        text-align: center;
+        margin-bottom: 25px;
+        font-size:2.2em;
+        font-weight:700;
+      }
+      .compare-form-box p {
+        font-size: 1em;
+        color: #666;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .compare-form-box label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: var(--text-color);
+      }
+      .compare-form-box input[type="text"],
+      .compare-form-box input[type="tel"],
+      .compare-form-box select {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-sizing: border-box;
+        font-size: 1em;
+      }
+      .form-group {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      .form-group > div {
+        flex: 1;
+      }
+      .content-section {
+        margin-top: 40px;
+        padding: 60px 0;
+        background-color: var(--bg-white);
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      }
+      .content-section h2 {
+        font-size: 2.8em;
+        color: var(--primary-color);
+        margin-bottom: 30px;
+        font-weight: 700;
+        text-align: center;
+        border-bottom: 3px solid var(--accent-color);
+        padding-bottom: 15px;
+      }
+      .content-section h3 {
+        font-size: 1.8em;
+        color: var(--secondary-color);
+        margin-top: 30px;
+        margin-bottom: 15px;
+        border-left: 5px solid var(--btn-color);
+        padding-left: 15px;
+        font-weight: 700;
+      }
+      .content-section h4 {
+        font-size: 1.4em;
+        color: var(--text-color);
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-weight: 500;
+      }
+      .feature-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 30px;
+      }
+      .feature-grid .item {
+        width: calc(33.33% - 20px);
+        margin: 10px;
+        padding: 30px;
+        background-color: var(--highlight-color);
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        transition: transform 0.3s, background-color 0.3s;
+      }
+      .feature-grid .item:hover {
+        transform: translateY(-5px);
+        background-color: #f0f8ff;
+      }
+      .feature-grid .item img {
+        width: 80px; height: 80px;
+        margin-bottom: 15px;
+      }
+      .keyword-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 30px;
+      }
+      .keyword-list li {
+        background-color: var(--secondary-color);
+        color: var(--bg-white);
+        padding: 10px 20px;
+        margin: 5px;
+        border-radius: 20px;
+        font-weight: 500;
+        transition: background-color 0.3s;
+      }
+      .keyword-list li:hover {
+        background-color: var(--primary-color);
+      }
+      .faq-item {
+        border-bottom: 1px solid #ddd;
+        padding: 20px 0;
+        transition: background-color 0.3s;
+      }
+      .faq-item:last-child {
+        border-bottom: none;
+      }
+      .faq-item h3 {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.4em;
+        color: var(--primary-color);
+        margin-top: 0;
+        margin-bottom: 0;
+        font-weight: 500;
+      }
+      .faq-item h3::after {
+        content: '+';
+        font-size: 1.5em;
+        color: var(--btn-color);
+        transition: transform 0.3s;
+      }
+      .faq-item.active h3::after {
+        content: '-';
+        transform: rotate(180deg);
+      }
+      .faq-item p {
+        display: none;
+        padding-top: 10px;
+        color: #555;
+        font-size: 1.1em;
+        margin-left: 15px; /* 들여쓰기 */
+      }
+      .faq-item.active p {
+        display: block;
+      }
+      footer {
+        background-color: var(--primary-color);
+        color: var(--bg-white);
+        text-align: center;
+        padding: 40px 20px;
+        font-size: 0.9em;
+        margin-top: 40px;
+      }
+      footer a {
+        color: var(--bg-white);
+        text-decoration: none;
+        margin: 0 10px;
+      }
+      footer a:hover {
+        text-decoration: underline;
+      }
+      .info-list {
+        list-style-type: disc;
+        margin-left: 20px;
+      }
+      .info-list li {
+        margin-bottom: 10px;
+        color: #444;
+      }
+      .table-container {
+        margin: 30px 0;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+        font-size: 0.9em;
+      }
+      th, td {
+        border: 1px solid #ddd;
+        padding: 12px;
+      }
+      th {
+        background-color: var(--secondary-color);
+        color: var(--bg-white);
+        font-weight: 500;
+      }
+      td {
+        background-color: var(--highlight-color);
+      }
+      .comparison-table td:nth-child(even) {
+        background-color: #f8f8f8;
+      }
+      .graph-container {
+        margin: 30px 0;
+        padding: 20px;
+        background-color: var(--highlight-color);
+        border-radius: 8px;
+        text-align: center;
+      }
+      .graph-container img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 6px;
+      }
+      .external-link-list {
+        list-style: none;
+        padding: 0;
+      }
+      .external-link-list li {
+        margin-bottom: 10px;
+        padding-left: 10px;
+        border-left: 3px solid var(--btn-color);
+      }
+      .external-link-list li a {
+        color: var(--secondary-color);
+        text-decoration: none;
+        font-size: 1.1em;
+      }
+      .external-link-list li a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 768px) {
+        .hero h1 { font-size: 2.4em; }
+        .hero p { font-size: 1.2em; }
+        .cta-btn { padding: 15px 30px; font-size: 1.1em; }
+        .compare-form-box { padding: 25px; }
+        .content-section h2 { font-size: 2.2em; }
+        .feature-grid .item { width: 100%; margin: 10px 0; }
+        .keyword-list li { margin: 3px; font-size: 0.9em; }
+        .form-group { flex-direction: column; }
+      }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="/">BMW 7시리즈 장기렌트 전문 비교 센터</a></h1>
+        </div>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <section class="hero">
+            <div class="hero-content container">
+                <h1>BMW 7시리즈 장기렌트, 최적의 조건으로 만나보세요.</h1>
+                <p>2026년형 BMW 7시리즈 신차 장기렌트부터 저렴한 승계 조건까지, 모든 업체의 견적을 한 번에 비교하고 현금지원 혜택을 받으세요.</p>
+                <div class="compare-form-box">
+                    <h2>BMW 7시리즈 무료 견적 비교 요청</h2>
+                    <p>간단한 정보 입력으로 실시간 견적을 확인하고 가장 합리적인 가격을 제시하는 딜러사를 연결해 드립니다.</p>
+                    <form action="#" method="post">
+                        <div class="form-group">
+                            <div>
+                                <label for="car-model">모델 선택</label>
+                                <select id="car-model" name="car-model" required>
+                                    <option value="">원하는 모델을 선택하세요</option>
+                                    <option value="730i">BMW 730i</option>
+                                    <option value="740i">BMW 740i</option>
+                                    <option value="740d">BMW 740d</option>
+                                    <option value="750e">BMW 750e (PHEV)</option>
+                                    <option value="i7">BMW i7 (전기차)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="rental-period">희망 렌트 기간</label>
+                                <select id="rental-period" name="rental-period" required>
+                                    <option value="">선택하세요</option>
+                                    <option value="36">36개월</option>
+                                    <option value="48">48개월</option>
+                                    <option value="60">60개월</option>
+                                </select>
+                            </div>
+                        </div>
+                        <label for="name">이름</label>
+                        <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+                        <label for="contact-phone">연락처</label>
+                        <input type="tel" id="contact-phone" name="contact-phone" placeholder="휴대폰 번호를 입력하세요" required>
+                        <label for="additional-options">추가 옵션/요구사항</label>
+                        <input type="text" id="additional-options" name="additional-options" placeholder="예: 무보증, 주행거리 2만km, 트림 등">
+                        <button type="submit" class="cta-btn">무료 견적 요청하고 할인받기</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>BMW 7시리즈 장기렌트, 왜 인기가 많을까요?</h2>
+                <p>BMW 7시리즈는 럭셔리 세단의 상징이며, 많은 성공한 사업가와 전문가들이 선호하는 모델입니다. 고가의 차량을 운용하는 데 있어 장기렌트는 초기 비용과 관리 부담을 획기적으로 줄여주는 매력적인 선택지입니다. 특히 2026년에는 경제 상황의 불확실성 증대로 인해 초기 비용 부담이 없는 장기렌트와 리스가 더욱 주목받고 있습니다.</p>
+
+                <h3>BMW 7시리즈 장기렌트의 장점과 단점 (장단점 비교)</h3>
+                <p>고급 세단인 BMW 7시리즈를 장기렌트로 이용할 때 얻을 수 있는 장점과 고려해야 할 단점을 명확히 비교해 보겠습니다. 이를 통해 개인의 상황에 맞는 합리적인 결정을 내리는 데 도움을 드립니다.</p>
+
+                <div class="table-container">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>구분</th>
+                                <th>장점 (Pros)</th>
+                                <th>단점 (Cons)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>초기 비용</td>
+                                <td>보증금 없이 무보증 렌트 가능. 취등록세, 공채 등 초기 목돈 지출 없음.</td>
+                                <td>보증금 설정 시 월 렌트료 절감 가능.</td>
+                            </tr>
+                            <tr>
+                                <td>세금 및 보험</td>
+                                <td>자동차세, 보험료가 월 렌트료에 포함되어 계산 편리. 사업자 세금 절감 효과.</td>
+                                <td>보험료 경력 단절 (개인 보험 가입X).</td>
+                            </tr>
+                            <tr>
+                                <td>유지 관리</td>
+                                <td>정기적인 점검 및 소모품 교체 서비스 포함 (정비 포함형 선택 시).</td>
+                                <td>약정 주행거리 초과 시 추가 비용 발생.</td>
+                            </tr>
+                            <tr>
+                                <td>차량 명의</td>
+                                <td>렌터카 회사 명의로 건강보험료 및 재산세 증가 부담 없음.</td>
+                                <td>'하', '허', '호' 번호판 사용 (번호판 식별 가능).</td>
+                            </tr>
+                            <tr>
+                                <td>만기 시 처리</td>
+                                <td>인수, 반납, 재렌트 등 선택권 다양.</td>
+                                <td>인수 시 인수 비용 발생.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>2026년 BMW 7시리즈 트렌드: AI와 디지털 접목</h3>
+                <p>최근 BMW 7시리즈는 단순한 이동 수단을 넘어 AI 기술이 집약된 모바일 오피스로 진화하고 있습니다. 2026년형 모델에는 제미나이(Gemini), 챗지피티(ChatGPT) 등 고도화된 AI 에이전트 기술이 차량 인포테인먼트 시스템에 통합되어, 음성 명령만으로 복잡한 업무 처리나 정보 검색이 가능해졌습니다. 이러한 첨단 기술이 적용된 신차를 구매하는 대신 장기렌트로 이용하면, 차량 감가상각에 대한 부담 없이 최신 기술을 빠르게 경험할 수 있습니다. 특히 럭셔리 세단의 경우 감가율이 높아질수록 렌트의 경제성이 더욱 부각됩니다.</p>
+            </div>
+        </section>
+
+        <section class="content-section" style="background-color: var(--section-bg-dark);">
+            <div class="container">
+                <h2>BMW 7시리즈 장기렌트 비용 산출 분석 및 절약 팁</h2>
+                <p>BMW 7시리즈의 장기렌트 비용은 단순히 차량 가격으로만 결정되지 않습니다. 업체별로 다른 프로모션, 잔존가치 책정, 계약 조건에 따라 월 납입금이 크게 차이 납니다. 현명한 견적 비교를 위해 비용 구성 요소를 이해하는 것이 중요합니다.</p>
+
+                <div class="graph-container">
+                    <h3>장기렌트 비용에 영향을 미치는 주요 요인 (2026년 기준)</h3>
+                    <img src="https://via.placeholder.com/600x300/1A759F/fff?text=BMW+장기렌트+비용+영향+요인+분석+그래프" alt="BMW 장기렌트 비용 변동 요인 그래프">
+                    <p><strong>그래프 해석:</strong> 비용 변동 요인 중 가장 큰 영향을 미치는 것은 계약 조건(렌트 기간, 약정 주행거리, 초기 비용)이며, 다음으로 업체별 프로모션과 금리 변동이 큰 비중을 차지합니다. 신규 가입 혜택이나 현금지원 프로모션을 잘 활용하면 예상 금액보다 저렴한 비용으로 계약할 수 있습니다.</p>
+                </div>
+
+                <h3>BMW 7시리즈 장기렌트 비용 절감 실전 노하우</h3>
+                <h4>1. 여러 업체 견적 비교는 필수</h4>
+                <p>BMW 7시리즈 장기렌트는 캐피탈사, 렌터카사, 에이전시 등 다양한 곳에서 취급하며, 업체마다 프로모션과 할인율이 다릅니다. '저렴한곳'을 찾기 위해서는 최소 3곳 이상의 업체 견적을 받아 '내돈내산' 후기를 참고하여 최종 결정을 내리는 것이 현명합니다. A사는 초기 비용을 낮추는 대신 월 납입금을 높이고, B사는 만기 시 인수 비용을 낮추는 등 조건이 천차만별입니다.</p>
+                <h4>2. 신규 가입 및 이벤트 활용</h4>
+                <p>업체들은 신규 고객 유치를 위해 현금지원이나 사은품 증정 이벤트를 진행하기도 합니다. 특히 비수기(여름, 겨울)나 연말에는 재고 소진을 위한 대대적인 할인이 이루어지므로, 이 시기를 노려 가입하면 큰 폭의 비용 절감 혜택을 받을 수 있습니다. 각종 SNS 채널(네이버, 구글, 유튜브, 인스타그램, 페이스북)에서도 프로모션 정보를 얻을 수 있습니다.</p>
+                <h4>3. 계약 조건 세부 조정</h4>
+                <p><strong>보증금 vs 선납금:</strong> 초기 비용을 낮추려면 무보증으로 진행하되, 월 렌트료를 낮추고 싶다면 보증금이나 선납금을 활용할 수 있습니다. <strong>잔존가치:</strong> 만기 후 인수를 고려한다면 잔존가치를 낮게 설정하는 것이 유리하며, 반납을 고려한다면 잔존가치를 높게 설정하여 월 렌트료를 낮추는 것이 유리합니다. 전문가와 상담하여 개인 상황에 맞는 최적의 조건을 설계하세요.</p>
+
+                <h3>함께 많이 찾는 키워드</h3>
+                <ul class="keyword-list">
+                    <li>#BMW7시리즈가격</li>
+                    <li>#장기렌트비용</li>
+                    <li>#BMW7시리즈견적</li>
+                    <li>#수입차장기렌트전문</li>
+                    <li>#법인장기렌트추천</li>
+                    <li>#장기렌트단점</li>
+                    <li>#무보증장기렌트</li>
+                    <li>#BMW프로모션</li>
+                    <li>#장기렌트승계</li>
+                    <li>#2026BMW7시리즈</li>
+                    <li>#장기렌트현금지원</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>BMW 7시리즈 장기렌트 업체 순위 및 비교 분석</h2>
+                <p>BMW 7시리즈와 같은 럭셔리 세단을 장기렌트 할 때는 업체의 신뢰도, 정비 서비스 품질, A/S 정책이 중요합니다. 단순히 '싼곳'을 찾기보다 전문적인 관리 서비스를 제공하는 업체를 선택해야 합니다. 주요 장기렌트 업체들의 특징과 비교 기준을 알아보겠습니다.</p>
+
+                <h3>주요 업체별 서비스 특징</h3>
+                <div class="info-list">
+                    <li><strong>캐피탈사 (예: 롯데캐피탈, 현대캐피탈):</strong> 금리가 상대적으로 낮고 다양한 상품을 보유하고 있지만, 렌트 기간이 길고 주행거리 제한이 엄격할 수 있습니다.</li>
+                    <li><strong>렌터카사 (예: SK렌터카, 롯데렌터카):</strong> 차량 관리 및 정비 서비스가 체계적이며, 사고 시 대차 서비스가 잘 갖춰져 있습니다. 다양한 렌트 옵션과 프로모션을 제공합니다.</li>
+                    <li><strong>장기렌트 비교 에이전시 (예: AJ셀카, 신차드림):</strong> 여러 업체의 견적을 한 번에 비교해 주며, 고객 맞춤형 컨설팅을 제공하여 가장 저렴한 견적을 찾아줍니다.</li>
+                </div>
+
+                <h3>장기렌트 VS 운용리스: 나에게 맞는 선택은?</h3>
+                <p>BMW 7시리즈 장기렌트와 운용리스는 언뜻 비슷해 보이지만, 세금 처리 방식과 보험, 번호판 등에서 큰 차이를 보입니다. 특히 사업자라면 세무적인 혜택을 꼼꼼히 따져봐야 합니다.</p>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>구분</th>
+                                <th>장기렌트</th>
+                                <th>운용리스</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>번호판</td>
+                                <td>'하', '허', '호' (렌터카 번호판)</td>
+                                <td>일반 자가용 번호판</td>
+                            </tr>
+                            <tr>
+                                <td>보험 처리</td>
+                                <td>렌트사 명의로 가입, 개인 보험료 할증 없음</td>
+                                <td>개인 명의로 가입, 보험 경력 유지 및 할증 발생</td>
+                            </tr>
+                            <tr>
+                                <td>세금 처리</td>
+                                <td>월 렌트료 전액 손비 처리 가능 (부가세 환급 가능)</td>
+                                <td>이자 비용만 손비 처리 (부가세 환급 불가)</td>
+                            </tr>
+                            <tr>
+                                <td>초기 비용</td>
+                                <td>무보증 가능, 비교적 진입 장벽 낮음</td>
+                                <td>보증금 또는 잔가 설정 필수</td>
+                            </tr>
+                            <tr>
+                                <td>만기 시 처리</td>
+                                <td>인수, 반납, 재렌트</td>
+                                <td>인수, 반납, 재리스</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>BMW 7시리즈 장기렌트 시 꼭 확인해야 할 사항</h3>
+                <p>계약 전 체크리스트를 통해 불필요한 비용 지출을 막고 만족도를 높이세요.</p>
+                <div class="info-list">
+                    <li><strong>약정 주행거리:</strong> 연간 주행거리를 꼼꼼하게 예측하여 계약하세요. 초과 시 km당 과금되는 비용이 생각보다 클 수 있습니다.</li>
+                    <li><strong>정비 서비스 포함 여부:</strong> 고급 차량인 BMW 7시리즈는 정비 비용이 높습니다. 월 렌트료가 조금 비싸더라도 정비 포함형 상품을 선택하는 것이 장기적으로 유리합니다.</li>
+                    <li><strong>면책금 설정:</strong> 사고 발생 시 본인 부담금인 면책금 금액을 확인하세요. 면책금을 높이면 월 렌트료가 저렴해지지만, 사고 시 부담이 커집니다.</li>
+                    <li><strong>승계 조건 확인:</strong> 계약 중 해지 시 위약금이 높습니다. 부득이하게 계약을 해지해야 할 경우, 승계 조건(승계 수수료, 잔여 기간 등)을 미리 확인해 두는 것이 좋습니다.</li>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>자주 묻는 질문 (FAQ)</h2>
+                <div class="faq-item">
+                    <h3>BMW 7시리즈 장기렌트카 보험료는 얼마인가요?</h3>
+                    <p>BMW 7시리즈와 같은 고급 차량의 보험료는 일반 차량보다 높습니다. 하지만 장기렌트는 개인이 아닌 렌트사 명의로 보험이 가입되므로, 개인의 운전 경력과 무관하게 보험료가 책정됩니다. 따라서 렌트료에 포함된 보험료가 개인 보험료보다 저렴할 수도, 비쌀 수도 있습니다. 사고 시 할증 부담이 없다는 장점이 있습니다.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>BMW 7시리즈 장기렌트카를 인수할 때 비용은 얼마인가요?</h3>
+                    <p>인수 비용은 계약 시 정한 잔존가치와 남은 월 렌트료, 그리고 차량의 상태에 따라 달라집니다. 잔존가치를 낮게 설정하면 월 렌트료가 높아지지만, 만기 시 인수 비용은 저렴해집니다. 반대로 잔존가치를 높게 설정하면 월 렌트료는 낮아지지만, 만기 시 인수 비용이 높아집니다. 인수 계획이 있다면 계약 초기 단계에서 잔존가치를 신중하게 조절해야 합니다.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>BMW 7시리즈 장기렌트 시 신용 등급이 중요한가요?</h3>
+                    <p>장기렌트는 신차 구매와 달리 대출 상품이 아니지만, 렌트 업체는 고객의 월 렌트료 납부 능력을 확인하기 위해 신용 등급을 조회합니다. 일반적으로 NICE 신용평가 기준 6등급 이상이면 무보증으로도 계약이 가능합니다. 다만 신용 등급이 낮으면 보증금 납부를 요구받거나 계약 자체가 거절될 수 있습니다.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>BMW 7시리즈 신차급 중고차도 장기렌트가 가능한가요?</h3>
+                    <p>네, 가능합니다. 신차급 중고차를 인수하여 장기렌트 하는 '장기 렌트 승계' 상품을 이용하면 신차보다 저렴한 비용으로 BMW 7시리즈를 운용할 수 있습니다. 이미 차량을 운용 중이던 고객이 개인 사정으로 계약을 중도 해지할 때 발생하는 차량을 인계받는 방식입니다. 이 경우 신차 렌트보다 훨씬 저렴한 월 납입금으로 이용 가능하며, 중고차 커뮤니티(예: 디시인사이드) 등에서도 정보를 얻을 수 있습니다.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>법인 사업자의 BMW 7시리즈 장기렌트 비용 처리 장점은 무엇인가요?</h3>
+                    <p>법인 사업자의 경우 BMW 7시리즈 장기렌트 비용을 전액 손비(비용) 처리할 수 있어 법인세 절감 효과가 있습니다. 특히 리스와 달리 월 렌트료에 포함된 부가세까지 환급받을 수 있다는 큰 장점이 있습니다. 리스보다 장기렌트를 선호하는 이유 중 하나입니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>신뢰할 수 있는 외부 자료 및 참고 링크</h2>
+                <ul class="external-link-list">
+                    <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9%EC%A0%95%EB%B3%B4/%EC%9E%90%EB%8F%99%EC%B0%A8%EA%B4%80%EB%A6%AC%EB%B2%95" target="_blank" rel="noopener">법제처: 자동차관리법 (렌터카 운용 및 등록 관련 법령)</a></li>
+                    <li><a href="https://www.fss.or.kr/fss/main/index.do" target="_blank" rel="noopener">금융감독원: 금융소비자보호 (장기렌트 계약 관련 소비자 보호 규정)</a></li>
+                    <li><a href="https://www.kca.go.kr/index.do" target="_blank" rel="noopener">한국소비자원: 자동차 렌탈 서비스 소비자 피해사례 및 분쟁 해결 기준 안내</a></li>
+                    <li><a href="https://namu.wiki/w/%EC%9E%A5%EA%B8%B0%EB%A0%8C%ED%8A%B8" target="_blank" rel="noopener">나무위키: 장기렌트 (개념 및 장단점 분석)</a></li>
+                    <li><a href="https://www.molit.go.kr/portal/main.do" target="_blank" rel="noopener">국토교통부: 자동차 관련 정책 및 통계 정보</a></li>
+                </ul>
+                <p>위 자료들은 BMW 7시리즈 장기렌트 계약 시 소비자의 권리와 업체별 서비스 기준, 법적 규정 등을 확인하는 데 유용합니다.</p>
+            </div>
+        </section>
     </main>
-  </body>
-</html>
+
+    <script>
+        // FAQ 토글 기능
+        document.querySelectorAll('.faq-item h3').forEach(item => {
+            item.addEventListener('click', event => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
+    </script>
+  
